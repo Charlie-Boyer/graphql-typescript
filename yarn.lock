@@ -25,6 +25,17 @@
     knex "0.21.19"
     sqlstring "2.3.2"
 
+"@mikro-orm/migrations@^4.5.6":
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/@mikro-orm/migrations/-/migrations-4.5.6.tgz#c5723c393d07a9755939f685e4d785e5606693d4"
+  integrity sha512-PEyvUMkQLClZKFw3c27RE7ZkL5LsgUHrbonUi8kaGdKP8HrwrP0niC3pnbYM7YTMY6raSZ8vuc9Bz8mGGRXrqw==
+  dependencies:
+    "@mikro-orm/knex" "^4.5.6"
+    "@types/umzug" "2.3.0"
+    fs-extra "9.1.0"
+    knex "0.21.19"
+    umzug "2.3.0"
+
 "@mikro-orm/postgresql@^4.5.6":
   version "4.5.6"
   resolved "https://registry.yarnpkg.com/@mikro-orm/postgresql/-/postgresql-4.5.6.tgz#cadf07a4236c8f627185c078959e21d0835c078c"
@@ -66,10 +77,65 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@types/node@^15.12.2":
+"@types/bluebird@*":
+  version "3.5.35"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.35.tgz#3964c48372bf62d60616d8673dd77a9719ebac9b"
+  integrity sha512-2WeeXK7BuQo7yPI4WGOBum90SzF/f8rqlvpaXx4rjeTmNssGRDHWf7fgDUH90xMB3sUOu716fUK5d+OVx0+ncQ==
+
+"@types/bson@*":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-4.0.3.tgz#30889d2ffde6262abbe38659364c631454999fbf"
+  integrity sha512-mVRvYnTOZJz3ccpxhr3wgxVmSeiYinW+zlzQz3SXWaJmD1DuL05Jeq7nKw3SnbKmbleW5qrLG5vdyWe/A9sXhw==
+  dependencies:
+    "@types/node" "*"
+
+"@types/continuation-local-storage@*":
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@types/continuation-local-storage/-/continuation-local-storage-3.2.3.tgz#e4d5b5fddae1a432b78d19d48875c7e297f566e2"
+  integrity sha512-4LYeWblV+6puK9tFGM7Zr4OLZkVXmaL7hUK6/wHwbfwM+q7v+HZyBWTXkNOiC9GqOxv7ehhi5TMCbebZWeVYtw==
+  dependencies:
+    "@types/node" "*"
+
+"@types/lodash@*":
+  version "4.14.170"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.170.tgz#0d67711d4bf7f4ca5147e9091b847479b87925d6"
+  integrity sha512-bpcvu/MKHHeYX+qeEN8GE7DIravODWdACVA1ctevD8CN24RhPZIKMn9ntfAsrvLfSX3cR5RrBKAbYm9bGs0A+Q==
+
+"@types/mongodb@*":
+  version "3.6.18"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.6.18.tgz#7524c462fc7e3b67892afda8211cd045edee65eb"
+  integrity sha512-JSVFt9p0rTfZ4EgzXmVHUB3ue00xe3CRbQho8nXfImzEDDM4O7I3po1bwbWl/EIbLENxUreZxqLOc8lvcnLVPA==
+  dependencies:
+    "@types/bson" "*"
+    "@types/node" "*"
+
+"@types/node@*", "@types/node@^15.12.2":
   version "15.12.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.2.tgz#1f2b42c4be7156ff4a6f914b2fb03d05fa84e38d"
   integrity sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==
+
+"@types/sequelize@*":
+  version "4.28.9"
+  resolved "https://registry.yarnpkg.com/@types/sequelize/-/sequelize-4.28.9.tgz#64d0fad07de2f30ef11003a8c2ef5ac0321de115"
+  integrity sha512-QqYgkw/2fEc0FyEQejnxM7cHKB8XBV3Y69k7GSFOToQBOXos0PJVqNpgROXZddXIkl2d6zicYssHuy75ws84sw==
+  dependencies:
+    "@types/bluebird" "*"
+    "@types/continuation-local-storage" "*"
+    "@types/lodash" "*"
+    "@types/validator" "*"
+
+"@types/umzug@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@types/umzug/-/umzug-2.3.0.tgz#74ede18cf837ed8daa257c2bcf5a54e351c2a551"
+  integrity sha512-DUwMKFa+QmApO7I5zhqpc12n9+Mqm006+PTPKrqoZ4F38rk2+iWl8K5IjVvWemERajtkfkiBkHtH/YkOPcBQjA==
+  dependencies:
+    "@types/mongodb" "*"
+    "@types/sequelize" "*"
+
+"@types/validator@*":
+  version "13.1.4"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.1.4.tgz#d2e3c27523ce1b5d9dc13d16cbce65dc4db2adbe"
+  integrity sha512-19C02B8mr53HufY7S+HO/EHBD7a/R22IwEwyqiHaR19iwL37dN3o0M8RianVInfSSqP7InVSg/o0mUATM4JWsQ==
 
 abbrev@1:
   version "1.1.1"
@@ -185,6 +251,11 @@ binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
+
+bluebird@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
+  integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
 
 boxen@^4.2.0:
   version "4.2.0"
@@ -1925,6 +1996,13 @@ typescript@^4.3.3:
   version "4.3.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.3.tgz#5401db69bd3203daf1851a1a74d199cb3112c11a"
   integrity sha512-rUvLW0WtF7PF2b9yenwWUi9Da9euvDRhmH7BLyBG4DCFfOJ850LGNknmRpp8Z8kXNUPObdZQEfKOiHtXuQHHKA==
+
+umzug@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/umzug/-/umzug-2.3.0.tgz#0ef42b62df54e216b05dcaf627830a6a8b84a184"
+  integrity sha512-Z274K+e8goZK8QJxmbRPhl89HPO1K+ORFtm6rySPhFKfKc5GHhqdzD0SGhSWHkzoXasqJuItdhorSvY7/Cgflw==
+  dependencies:
+    bluebird "^3.7.2"
 
 unc-path-regex@^0.1.2:
   version "0.1.2"
