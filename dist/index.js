@@ -26,8 +26,12 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     });
     yield orm.getMigrator().up;
     const generator = orm.getSchemaGenerator();
-    yield generator.dropSchema();
-    yield generator.createSchema();
+    if (constants_1._PROD_)
+        yield generator.updateSchema();
+    if (!constants_1._PROD_) {
+        yield generator.dropSchema();
+        yield generator.createSchema();
+    }
     const post = orm.em.create(Post_1.Post, { title: 'my first post' });
     yield orm.em.persistAndFlush(post);
 });

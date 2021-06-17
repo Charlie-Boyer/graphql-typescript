@@ -15,8 +15,13 @@ const main = async () => {
   await orm.getMigrator().up;
 
   const generator = orm.getSchemaGenerator();
-  await generator.dropSchema();
-  await generator.createSchema();
+  
+  if (_PROD_) await generator.updateSchema();
+
+  if (!_PROD_) {
+    await generator.dropSchema();
+    await generator.createSchema();
+  }
 
   const post = orm.em.create(Post, { title: 'my first post' });
   await orm.em.persistAndFlush(post);
