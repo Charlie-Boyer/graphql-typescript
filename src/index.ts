@@ -4,10 +4,8 @@ import path from 'path';
 import { _PROD_ } from './constants';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-import { PostResolver } from './resolvers/post';
 
 const main = async () => {
-  
   //ORM
   const orm = await MikroORM.init({
     entities: [path.join(__dirname + '/entities')],
@@ -34,18 +32,16 @@ const main = async () => {
     console.log('server started on port 3000');
   });
 
-
+  console.log(__dirname + '/resolvers/**/*.{ts,js}');
   //Apollo server
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PostResolver],
+      resolvers: [__dirname + '/resolvers/**/*.{ts,js}'],
       validate: false,
     }),
     context: () => ({ em: orm.em }),
   });
   apolloServer.applyMiddleware({ app });
-
- 
 };
 
 main();

@@ -18,7 +18,6 @@ const path_1 = __importDefault(require("path"));
 const constants_1 = require("./constants");
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
-const post_1 = require("./resolvers/post");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const orm = yield core_1.MikroORM.init({
         entities: [path_1.default.join(__dirname + '/entities')],
@@ -39,9 +38,10 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     app.listen(3000, () => {
         console.log('server started on port 3000');
     });
+    console.log(__dirname + '/resolvers/**/*.{ts,js}');
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
-            resolvers: [post_1.PostResolver],
+            resolvers: [__dirname + '/resolvers/**/*.{ts,js}'],
             validate: false,
         }),
         context: () => ({ em: orm.em }),
