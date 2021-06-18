@@ -28,40 +28,61 @@ exports.UserResolver = void 0;
 const User_1 = require("../entities/User");
 const type_graphql_1 = require("type-graphql");
 const argon2_1 = __importDefault(require("argon2"));
-let UsernamePasswordInput = class UsernamePasswordInput {
+let UserResponse = class UserResponse {
 };
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field(() => String, { nullable: true }),
     __metadata("design:type", String)
-], UsernamePasswordInput.prototype, "username", void 0);
+], UserResponse.prototype, "errors", void 0);
 __decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UsernamePasswordInput.prototype, "password", void 0);
-UsernamePasswordInput = __decorate([
-    type_graphql_1.InputType()
-], UsernamePasswordInput);
+    type_graphql_1.Field(() => User_1.User, { nullable: true }),
+    __metadata("design:type", User_1.User)
+], UserResponse.prototype, "user", void 0);
+UserResponse = __decorate([
+    type_graphql_1.ObjectType()
+], UserResponse);
 let UserResolver = class UserResolver {
-    register(options, { em }) {
+    register(username, password, { em }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const hashedPassword = yield argon2_1.default.hash(options.password);
+            const hashedPassword = yield argon2_1.default.hash(password);
             const user = em.create(User_1.User, {
-                username: options.username,
+                username,
                 password: hashedPassword,
             });
             yield em.persistAndFlush(user);
             return user;
         });
     }
+    login(username, password, { em }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield em.findOne(User_1.User, { username });
+            if (!user)
+                return { errors: "pas d'utilisateur" };
+            if (yield argon2_1.default.verify(user.password, password))
+                return { user };
+            else
+                return { errors: 'mauvais mot de passe' };
+        });
+    }
 };
 __decorate([
     type_graphql_1.Mutation(() => User_1.User),
-    __param(0, type_graphql_1.Arg('options')),
-    __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('username')),
+    __param(1, type_graphql_1.Arg('password')),
+    __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UsernamePasswordInput, Object]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "register", null);
+__decorate([
+    type_graphql_1.Mutation(() => UserResponse),
+    __param(0, type_graphql_1.Arg('username')),
+    __param(1, type_graphql_1.Arg('password')),
+    __param(2, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "login", null);
 UserResolver = __decorate([
     type_graphql_1.Resolver()
 ], UserResolver);
