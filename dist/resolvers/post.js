@@ -8,39 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Post = void 0;
-const core_1 = require("@mikro-orm/core");
+exports.PostResolver = void 0;
+const Post_1 = require("../entities/Post");
 const type_graphql_1 = require("type-graphql");
-let Post = class Post {
-    constructor() {
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
+let PostResolver = class PostResolver {
+    posts({ em }) {
+        return em.find(Post_1.Post, {});
     }
 };
 __decorate([
-    type_graphql_1.Field(),
-    core_1.PrimaryKey(),
-    __metadata("design:type", Number)
-], Post.prototype, "id", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    core_1.Property(),
-    __metadata("design:type", String)
-], Post.prototype, "title", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    core_1.Property(),
-    __metadata("design:type", Date)
-], Post.prototype, "createdAt", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    core_1.Property({ onUpdate: () => new Date() }),
-    __metadata("design:type", Date)
-], Post.prototype, "updatedAt", void 0);
-Post = __decorate([
-    type_graphql_1.ObjectType(),
-    core_1.Entity()
-], Post);
-exports.Post = Post;
-//# sourceMappingURL=Post.js.map
+    type_graphql_1.Query(() => [Post_1.Post]),
+    __param(0, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], PostResolver.prototype, "posts", null);
+PostResolver = __decorate([
+    type_graphql_1.Resolver()
+], PostResolver);
+exports.PostResolver = PostResolver;
+//# sourceMappingURL=post.js.map

@@ -6,6 +6,7 @@ import { Post } from './entities/Post';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { HelloResolver } from './resolvers/hello';
+import { PostResolver } from './resolvers/post';
 
 const main = async () => {
   const orm = await MikroORM.init({
@@ -34,15 +35,16 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver],
+      resolvers: [HelloResolver, PostResolver],
       validate: false,
     }),
+    context: () => ({ em: orm.em }),
   });
 
   apolloServer.applyMiddleware({ app });
 
   app.listen(3000, () => {
-    console.log('server started on port 4000');
+    console.log('server started on port 3000');
   });
 };
 
