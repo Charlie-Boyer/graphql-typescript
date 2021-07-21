@@ -15,7 +15,7 @@ const main = async () => {
     debug: !_PROD_,
   });
 
-  //Create database
+  //Create Database
   await orm.getMigrator().up;
   const generator = orm.getSchemaGenerator();
   if (_PROD_) await generator.updateSchema();
@@ -32,7 +32,6 @@ const main = async () => {
     console.log('server started on port 3000');
   });
 
-  console.log(__dirname + '/resolvers/**/*.{ts,js}');
   //Apollo server
   const apolloServer = new ApolloServer({
     schema: await buildSchema({

@@ -38,7 +38,6 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     app.listen(3000, () => {
         console.log('server started on port 3000');
     });
-    console.log(__dirname + '/resolvers/**/*.{ts,js}');
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
             resolvers: [__dirname + '/resolvers/**/*.{ts,js}'],

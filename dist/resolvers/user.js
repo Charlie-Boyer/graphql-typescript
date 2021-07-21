@@ -58,10 +58,10 @@ let UserResolver = class UserResolver {
             const user = yield em.findOne(User_1.User, { username });
             if (!user)
                 return { errors: "pas d'utilisateur" };
-            if (yield argon2_1.default.verify(user.password, password))
-                return { user };
-            else
+            const valid = yield argon2_1.default.verify(user.password, password);
+            if (!valid)
                 return { errors: 'mauvais mot de passe' };
+            return { user };
         });
     }
 };

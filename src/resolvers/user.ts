@@ -37,7 +37,11 @@ export class UserResolver {
   ) {
     const user = await em.findOne(User, { username });
     if (!user) return { errors: "pas d'utilisateur" };
-    if (await argon2.verify(user.password, password)) return { user };
-    else return { errors: 'mauvais mot de passe' };
+
+    const valid = await argon2.verify(user.password, password);
+    if (!valid) return { errors: 'mauvais mot de passe' };
+
+    return { user };
   }
 }
+ 
